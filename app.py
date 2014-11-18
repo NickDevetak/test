@@ -18,7 +18,8 @@ def hello_name(name):
 
 @app.route('/results', methods=['GET'])
 def results():
-    all_results = Result.query.all()
+    #all_results = Result.query.all()
+    all_results = Result.query.filter_by(feature = 'feature1')
     return render_template('results.html', results=all_results)
 
 @app.route('/upload', methods=['POST'])
