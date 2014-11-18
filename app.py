@@ -27,9 +27,10 @@ def results():
 @app.route('/upload', methods=['POST'])
 def upload_results():
     json_text = request.get_json()
-    run_id = uuid.uuid4()
+    run_id_value = str(uuid.uuid4())
     for i in json_text['results']:
         result = Result(
+            run_id=run_id_value,
             feature=i['feature'],
             scenario=i['scenario'],
             run_time=i['run_time'],
