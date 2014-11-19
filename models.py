@@ -11,13 +11,15 @@ class Result(db.Model):
     scenario = db.Column(db.String())
     run_time = db.Column(db.String())
     status = db.Column(db.String())
+    run_date = db.Column(db.DateTime)
 
-    def __init__(self, run_id, feature, scenario, run_time, status):
+    def __init__(self, run_id, feature, scenario, run_time, status, run_date):
         self.run_id = run_id
         self.feature = feature
         self.scenario = scenario
         self.run_time = run_time
         self.status = status
+        self.run_date = run_date
 
     def __repr__(self):
         return '<id {}>'.format(self.id)

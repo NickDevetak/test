@@ -3,6 +3,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import os
 import json
 import uuid
+import datetime
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -21,13 +22,15 @@ def hello_name(name):
 @app.route('/results', methods=['GET'])
 def results():
     #all_results = Result.query.all()
-    all_results = Result.query.filter_by(feature = 'feature1')
+    #all_results = Result.query.filter_by(feature = 'feature1')
+    all_results = db.session.query(Result.run_id, Result.run_date).group_by(Result.run_id, Result.run_date)
     return render_template('results.html', results=all_results)
 
 @app.route('/upload', methods=['POST'])
 def upload_results():
     json_text = request.get_json()
     run_id_value = str(uuid.uuid4())
+    run_date_value = datetime.datetime.now()
     for i in json_text['results']:
         result = Result(
             run_id=run_id_value,
@@ -35,6 +38,7 @@ def upload_results():
             scenario=i['scenario'],
             run_time=i['run_time'],
             status=i['status'],
+            run_date=run_date_value,
             )
         db.session.add(result)
         db.session.commit()
