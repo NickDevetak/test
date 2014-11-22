@@ -5,7 +5,7 @@
           {% for group in results|groupby('feature') %}
             <li><h2>{{ group.grouper }}</h2><ul>
             {% for result in group.list %}
-              <li><a href='/scenario/{{result.scenario_check_sum}}'>{{ result.scenario }} </a> run time: {{result.run_time}}</li>
+              <li><a href='/scenario-history/{{result.scenario_check_sum}}'>{{ result.scenario }} </a> run time: {{result.run_time}}</li>
             {% endfor %}</ul></li>
           {% endfor %}
         </ul>
