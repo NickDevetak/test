@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h1>Scenario history</h1>
+      <ul>
+        {% for group in results|groupby('scenario') %}
+          <li><h2>Scenario: {{ group.grouper }}</h2><ul>
+          {% for result in group.list %}
+            <li>run date: {{ result.run_date}} run time: {{ result.run_time }} status: {{ result.status }}</li>
+          {% endfor %}</ul></li>
+        {% endfor %}
+      </ul>
+      <a href='/results'>Home</a>
+  </body>
+</html>

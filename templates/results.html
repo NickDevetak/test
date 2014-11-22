@@ -1,14 +1,12 @@
 <html>
   <body>
     <h1>Results page</h1>
-
-                <ul class="results-list">
-                    {% for result in results %}
-                    <li class="result">
-                        run_id {{ result.run_id }} run_date {{ result.run_date }} 
-                    </li>
-                    {% endfor %}
-                </ul>
-
+      <ul class="results-list">
+      {% for result in results %}
+        <li class="result">
+          run date: {{ result.run_date }} number of scenarios: {{ result.count }} <a href='/run-results/{{result.run_id}}'>View scenario results</a> 
+        </li>
+      {% endfor %}
+      </ul>
   </body>
 </html>

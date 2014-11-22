@@ -3,7 +3,7 @@ My test
 
 DATABASE_URL='postgresql://localhost/cucumber'
 
-APP_SETTINGS=config.StagingConfig
+APP_SETTINGS='config.StagingConfig'
 
 python app.py
 
@@ -27,3 +27,10 @@ at_exit do
   response = http.request(request)
   puts response.body
 end
+
+python manage.py db migrate
+
+python manage.py db upgrade
+
+
+heroku run python manage.py db upgrade --app shrouded-springs-5349

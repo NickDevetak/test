@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <h1>Results for {{run_id}}</h1>
+        <ul>
+          {% for group in results|groupby('feature') %}
+            <li><h2>{{ group.grouper }}</h2><ul>
+            {% for result in group.list %}
+              <li><a href='/scenario/{{result.scenario_check_sum}}'>{{ result.scenario }} </a> run time: {{result.run_time}}</li>
+            {% endfor %}</ul></li>
+          {% endfor %}
+        </ul>
+        <a href='/results'>Home</a>
+  </body>
+</html>
