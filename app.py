@@ -48,6 +48,7 @@ def upload_results():
             status=i['status'],
             run_date=run_date_value,
             scenario_check_sum=hashlib.md5(i['scenario_steps']).hexdigest(),
+            scenario_steps=i['scenario_steps']
             )
         db.session.add(result)
     db.session.commit()
@@ -65,7 +66,6 @@ def run_results(run_id):
 def scenario_history(scenario_check_sum):
 	scenario_list = db.session.query(Result.run_id, Result.scenario, Result.status, Result.run_date, Result.run_time).\
 	filter_by(scenario_check_sum=scenario_check_sum).order_by(desc(Result.run_date)).all()
- 	print scenario_list
 	scenario_run_times = db.session.query(Result.run_time, Result.run_date).filter_by(status='passed', scenario_check_sum=scenario_check_sum).\
 	order_by(desc(Result.run_date)).limit(5).all()
 	chart_values = []
@@ -80,7 +80,8 @@ def scenario_history(scenario_check_sum):
 	title = {"text": 'Scenario run times (passing scenarios only)'}
 	xAxis = {"categories": xAxis_categories}
 	yAxis = {"title": {"text": 'Time'}}
-	return render_template('scenario_history.html', results=scenario_list, chartID='chart_ID', chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
+	return render_template('scenario_history.html', results=scenario_list, chartID='chart_ID',\
+     chart=chart, series=series, title=title, xAxis=xAxis, yAxis=yAxis)
 
 
 if __name__ == '__main__':
