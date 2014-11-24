@@ -1,9 +1,9 @@
 My test
 
 
-DATABASE_URL='postgresql://localhost/cucumber'
+export DATABASE_URL='postgresql://localhost/cucumber'
 
-APP_SETTINGS='config.StagingConfig'
+export APP_SETTINGS='config.StagingConfig'
 
 python app.py
 
